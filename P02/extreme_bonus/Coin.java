@@ -2,7 +2,7 @@ public class Coin {
 
 	//private fields 
 	private Denomination denomination;
-	priavte int year;
+	private int year;
 
 	//public constructor
 	public Coin(Denomination denomination, int year){
@@ -21,13 +21,15 @@ public class Coin {
 				if (year <1983) return 3.110;
 				else return 2.500;
 			case NICKEL:
-				return 5.000
+				return 5.000;
 			case DIME:
 				if (year <1965) return 2.500;
 				else return 2.268;
 			case QUARTER:
 				if (year <1965) return 6.250;
 				else return 5.670;
+			default: 
+				return 0.00;
 		}
 	}
 	//public method to get year
