@@ -5,11 +5,11 @@ public class Purse {
 
 		//create coin array
 		Coin[] coins = {
-			new Coin(Denomination.PENNY, 1905 ),
-			new Coin(Denomination.NICKEL, 1981),
+			new Coin(Denomination.PENNY, 1905),
+			new Coin(Denomination.QUARTER, 1975),
 			new Coin(Denomination.DIME, 1976),
-			new Coin(Denomination.DIME, 2020),
-			new Coin(Denomination.QUARTER, 1975)
+			new Coin(Denomination.NICKEL, 1981),
+			new Coin(Denomination.DIME, 2020)
 		};
 
 		double total=0.00;
@@ -19,9 +19,9 @@ public class Purse {
 		
 		for(Coin coin : coins){
 			//finding total value 
-			double value = coin.getValue();
+			total += coin.getValue();
 			int year = coin.getYear();
-			total += value;
+			
 
 			//finding the earliest and latest coin in purse
 			if (year < earliestCoin){
