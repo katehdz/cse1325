@@ -21,9 +21,9 @@ public class Purse {
 			//print each coin first 
 			System.out.println(coin);
 
-			double value = coin.getValue();
+			total += coin.getValue();
 			int year = coin.getYear();
-			total += value;
+			
 
 			//finding early and latest coin
 			if (year < earliestCoin){
