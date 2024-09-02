@@ -5,7 +5,7 @@ public class Purse {
 		//create coin array
 		Coin[] coins = {
 			new Coin(Denomination.PENNY, 1905),
-			new Coin(Denomination.QUARTER, 1975)
+			new Coin(Denomination.QUARTER, 1975),
 			new Coin(Denomination.DIME, 1976),
 			new Coin(Denomination.NICKEL, 1981),
 			new Coin(Denomination.DIME, 2020)
