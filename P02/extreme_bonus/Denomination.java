@@ -2,7 +2,7 @@ public enum Denomination {
 	PENNY(0.01), NICKEL(0.05), DIME(0.10), QUARTER(0.25);
 
 	//private field 
-	private final double value;
+	private double value;
 
 	//private constructor
 	Denomination(double value){
