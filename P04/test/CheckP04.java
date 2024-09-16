@@ -1,6 +1,6 @@
 // UNCOMMENT line 3 if you choose to place this in your test package.
 // OTHERWISE run this from the cse1325/P04 directory.
-// package test;
+ package test;
 
 // This class will provide an interactive test for a COMPLETED P04 implementation.
 //
