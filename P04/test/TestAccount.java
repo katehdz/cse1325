@@ -43,8 +43,8 @@ public class TestAccount {
             System.exit(1);
         }
 
-        // Manually reset points to 0
-        alacarteAccount = new Alacarte(); // Creating a new instance to ensure pointsRemaining is 0
+        // reset points to 0
+        alacarteAccount = new Alacarte(); //pointsRemaining is 0
         result = alacarteAccount.play(media);
         if (!result.equals("Buy more points: Requires 10 points, you have 0 points")) {
             System.out.println("Fail:\nExpected: Buy more points: Requires 10 points, you have 0 points\nActual: " + result);
