@@ -10,7 +10,7 @@ public class TestAccount {
 		int accountToTest=2;
 
 		for (int i=1; i<= accountToTest; i++){
-			Account account = new Account();
+			Account account = new Unlimited();
 
 			if (account.getAccountNumber() !=i){
 			System.out.println("Fail:\nExpected account number " + i + "\nActual account number: " + account.getAccountNumber());
@@ -31,8 +31,13 @@ public class TestAccount {
             System.exit(1);
         }
 
+        String result = unlimitedAccount.play(media);
+        if (!result.equals("Playing The Little Shop of Horrors (https://publicdomainmovie.net/movie/the-little-shop-of-horrors-0, 10 points)")) {
+            System.out.println("Fail:\nExpected: Playing The Little Shop of Horrors (https://publicdomainmovie.net/movie/the-little-shop-of-horrors-0, 10 points)\nActual: " + result);
+            System.exit(1);
+        }
         // Test playing media with enough points
-        String result = alacarteAccount.play(media);
+        result = alacarteAccount.play(media);
         if (!result.equals("Playing The Little Shop of Horrors (https://publicdomainmovie.net/movie/the-little-shop-of-horrors-0, 10 points)")) {
             System.out.println("Fail:\nExpected: Playing The Little Shop of Horrors (https://publicdomainmovie.net/movie/the-little-shop-of-horrors-0, 10 points)\nActual: " + result);
             System.exit(1);
