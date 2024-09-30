@@ -23,12 +23,13 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTIO
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+package mdi;
 
 import java.util.List;
 import java.util.ArrayList;
 
 // This class manages the entire menu and dispatch table
-class Menu {
+public class Menu {
     private List<MenuItem> items = new ArrayList<>();
 
     public void addMenuItem(MenuItem item) {
@@ -61,7 +62,7 @@ class Menu {
         }
         if (cancelInput != null && s.equals(cancelInput)) s = null;
         return s;
-        
+
     }
 
     public static String getString(String prompt, String cancelInput) {
