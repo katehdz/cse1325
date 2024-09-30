@@ -46,6 +46,55 @@ class Menu {
     public void run(int itemNumber) {
         items.get(itemNumber).run();
     }
+
+    public static String getString(String prompt, String cancelInput, String defaultInput) {
+        String s = null;
+        while (true) {
+            try {
+                System.out.print(prompt);
+                s = System.console().readLine().trim(); // Adjusted to read user input
+                if (s.isEmpty() && defaultInput != null) s = defaultInput;
+                break;
+            } catch (Exception e) {
+                System.err.println("Invalid input!");
+            }
+        }
+        if (cancelInput != null && s.equals(cancelInput)) s = null;
+        return s;
+        
+    }
+
+    public static String getString(String prompt, String cancelInput) {
+        return getString(prompt, cancelInput, null);
+    }
+
+    public static String getString(String prompt) {
+        return getString(prompt, null, null);
+    }
+
+    public static Integer getInt(String prompt, String cancelInput, String defaultInput) {
+        Integer i = null;
+        while (true) {
+            try {
+                String s = getString(prompt, cancelInput, defaultInput);
+                if (s != null && !s.isEmpty()) i = Integer.parseInt(s);
+                break;
+            } catch (Exception e) {
+                System.err.println("Invalid input!");
+            }
+        }
+        return i;
+    }
+
+    public static Integer getInt(String prompt, String cancelInput) {
+        return getInt(prompt, cancelInput, null);
+    }
+
+    public static Integer getInt(String prompt) {
+        return getInt(prompt, null, null);
+    }
 }
+
+
 
 
