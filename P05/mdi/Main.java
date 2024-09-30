@@ -14,21 +14,22 @@ public class Main {
 	private Scanner scanner;
 
 	public Main (){
-		moes = new Moes();
-		menu = new Menu();
-		output = " ";
-		running = true;
+		this.moes = new Moes();
+		this.menu = new Menu();
+		this.output = " ";
+		this.running = true;
 		scanner = new Scanner(System.in);
 
 		// Add menu items
-        menu.addMenuItem(new MenuItem("Exit\n", this::endApp));
-        menu.addMenuItem(new MenuItem("Play Media", this::playMedia));
-        menu.addMenuItem(new MenuItem("List Media", this::listMedia));
-        menu.addMenuItem(new MenuItem("List Available Points", this::listAvailablePoints));
-        menu.addMenuItem(new MenuItem("Buy Points", this::buyPoints));
-        menu.addMenuItem(new MenuItem("Add Media\n", this::addMedia));
-        menu.addMenuItem(new MenuItem("List All Students", this::listStudents));
-        menu.addMenuItem(new MenuItem("Add a Student", this::addStudent));
+        menu.addMenuItem(new MenuItem("Exit\n", () -> endApp()));
+	    menu.addMenuItem(new MenuItem("Play Media", () -> playMedia()));
+	    menu.addMenuItem(new MenuItem("List Media", () -> listMedia()));
+	    menu.addMenuItem(new MenuItem("List Available Points", () -> listAvailablePoints()));
+	    menu.addMenuItem(new MenuItem("Buy Points", () -> buyPoints()));
+	    menu.addMenuItem(new MenuItem("Add Media\n", () -> addMedia()));
+	    menu.addMenuItem(new MenuItem("List All Students", () -> listStudents()));
+	    menu.addMenuItem(new MenuItem("Add a Student", () -> addStudent()));
+
 	}
 
 	private void mdi(){
