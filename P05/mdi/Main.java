@@ -40,11 +40,10 @@ public class Main {
 			System.out.print("Selection? ");
 			if (scanner.hasNextInt()) {
             	int choice = scanner.nextInt();
-            	menu.run(choice); // Execute the command via the Menu's run method
+            	menu.run(choice); 
         	} else {
 	            System.out.println("Invalid input, please enter a number.");
-	            scanner.next(); // Consume the invalid input
-        	}
+	            scanner.next(); 
 		}
 	}
 
@@ -62,7 +61,7 @@ public class Main {
 
     System.out.print("Student ID? ");
     int id = scanner.nextInt();
-    scanner.nextLine();  // Consume leftover newline
+    scanner.nextLine();  
     
 
     System.out.print("Student email? ");
@@ -135,7 +134,6 @@ public class Main {
 	    System.out.println(moes.getStudentList());
 	    int studentIndex = scanner.nextInt();
 
-	    // Get points using Moes' getPoints method and print the result
 	    int points = moes.getPoints(studentIndex);
 	    System.out.println("Student has " + points + " points.");
     }
@@ -146,20 +144,17 @@ public class Main {
 	    System.out.println(moes.getStudentList());
 	    int studentIndex = scanner.nextInt();
 
-	    // Get the current points for the student
 	    int currentPoints = moes.getPoints(studentIndex);
 	    System.out.println("Current points: " + currentPoints);
 
 	    System.out.print("Buy how many points? ");
 	    int pointsToBuy = scanner.nextInt();
 
-	    // Validate input to prevent negative purchases
 	    if (pointsToBuy < 0) {
 	        System.out.println("Cannot purchase negative points.");
 	        return;
 	    }
 
-	    // Call buyPoints method in Moes and print the result
 	    output = moes.buyPoints(studentIndex, pointsToBuy);
 	    System.out.println(output);
 	    }
