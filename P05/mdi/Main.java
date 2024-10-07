@@ -58,19 +58,32 @@ public class Main {
 
     System.out.print("Student name? ");
     String name = scanner.nextLine();
+    if (name.isEmpty()){
+    	return;
+    }
     
 
     System.out.print("Student ID? ");
-    int id = scanner.nextInt();
-    scanner.nextLine();  
+    String idInput = scanner.nextLine();
+    if(idInput.isEmpty()){
+    	return;
+    }
     
+    int id= Integer.parseInt(idInput);
 
     System.out.print("Student email? ");
     String email = scanner.nextLine();
+    if(email.isEmpty()){
+    	return;
+    }
     
 
     System.out.print("(a)lacarte or (u)nlimited? ");
-    char accountType = scanner.next().charAt(0);
+    String accountTypeInput = scanner.nextLine();
+    if (accountTypeInput.isEmpty()){
+    	return;
+    }
+    char accountType = accountTypeInput.charAt(0);
     
 
     boolean unlimited = (accountType == 'u' || accountType == 'U');
@@ -93,12 +106,22 @@ public class Main {
     
 	    System.out.print("Title? ");
 	    String title = scanner.nextLine();
+	    if (title.isEmpty()){
+	    	return;
+	    }
 
 	    System.out.print("URL? ");
 	    String url = scanner.nextLine();
+	    if (url.isEmpty()){
+	    	return;
+	    }
 
 	    System.out.print("Points? ");
-	    int points = scanner.nextInt();
+	    String pointsInput = scanner.nextLine();
+	    if (pointsInput.isEmpty()){
+	    	return;
+	    }
+	    int points = Integer.parseInt(pointsInput);
 
 	    Media media = new Media(title, url, points);
 
