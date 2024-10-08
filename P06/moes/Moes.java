@@ -7,10 +7,58 @@ import customer.Unlimited;
 import product.Media;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class Moes {
 	private List<Media> library = new ArrayList<>();
 	private List<Student> customers = new ArrayList<>();
+
+	public Moes(){}
+
+	public Moes (BufferedReader br) throws IOException{
+		int mediaCount = Integer.parseInt(br.readLine());
+		for (int i=0; i < mediaCount; i++) {
+			library.add(new Media(br));
+		}
+		int customerCount = Integer.parseInt(br.readLine());
+		for (int i =0; i < customerCount; i++){
+			String name = br.readLine();
+			int id = Integer.parseInt(br.readLine());
+			String email = br.readLine();
+			boolean isUnlimited = Boolean.parseBoolean(br.readLine());
+
+			Student student = new Student(name, id,email, isUnlimited);
+
+			Account account = student.getAccount ();
+			if (account instanceof Alacarte) {
+				int pointsRemaining = Integer.parseInt(br.readLine());
+				((Alacarte) account).buyPoints(pointsRemaining);
+			}
+
+			customers.add(student);
+		}
+	}
+
+	public void save (BufferedWriter bw) throws IOException {
+
+        bw.write(library.size() + "\n");
+        for (Media media : library) {
+            media.save(bw);  
+        }
+
+        bw.write(customers.size() + "\n");
+        for (Student student : customers) {
+            bw.write(student.toString() + "\n");  
+            Account account = student.getAccount();
+            bw.write((account instanceof Unlimited) + "\n");  
+
+            if (account instanceof Alacarte) {
+                bw.write(((Alacarte) account).getPointsRemaining() + "\n");  
+            }
+        }
+	}
 
 	public void addMedia(Media media){
 		library.add(media);
