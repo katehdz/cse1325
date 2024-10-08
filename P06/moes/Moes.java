@@ -17,29 +17,34 @@ public class Moes {
 
 	public Moes(){}
 
-	public Moes (BufferedReader br) throws IOException{
-		int mediaCount = Integer.parseInt(br.readLine());
-		for (int i=0; i < mediaCount; i++) {
-			library.add(new Media(br));
-		}
-		int customerCount = Integer.parseInt(br.readLine());
-		for (int i =0; i < customerCount; i++){
-			String name = br.readLine();
-			int id = Integer.parseInt(br.readLine());
-			String email = br.readLine();
-			boolean isUnlimited = Boolean.parseBoolean(br.readLine());
+	public Moes(BufferedReader br) throws IOException {
+    int mediaCount = Integer.parseInt(br.readLine());
+    for (int i = 0; i < mediaCount; i++) {
+        library.add(new Media(br));
+    }
 
-			Student student = new Student(name, id,email, isUnlimited);
+    int customerCount = Integer.parseInt(br.readLine());
+    for (int i = 0; i < customerCount; i++) {
+        String name = br.readLine();
+        int id = Integer.parseInt(br.readLine());
+        String email = br.readLine();
+        
+        String accountType = br.readLine(); 
+        Student student;
+        
+        if (accountType.equals("true")) { 
+            student = new Student(name, id, email, true); 
+        } else {
+            student = new Student(name, id, email, false); 
+            int pointsRemaining = Integer.parseInt(br.readLine()); 
+            ((Alacarte) student.getAccount()).buyPoints(pointsRemaining);
+        }
 
-			Account account = student.getAccount ();
-			if (account instanceof Alacarte) {
-				int pointsRemaining = Integer.parseInt(br.readLine());
-				((Alacarte) account).buyPoints(pointsRemaining);
-			}
+        customers.add(student);
+    }
+}
 
-			customers.add(student);
-		}
-	}
+
 
 	public void save (BufferedWriter bw) throws IOException {
 

@@ -13,19 +13,14 @@ public class Student {
 
 	public Student(String name, int id, String email, boolean unlimited) {
 
-    if (email.endsWith("@uta.edu") || email.endsWith("@mavs.uta.edu")) {
-        this.name = name;
-        this.id = id;
-        this.email = email;
-
-        if (unlimited) {
-            this.account = new Unlimited();
-        } else {
-            this.account = new Alacarte();
-        }
-    } else {
-        throw new IllegalArgumentException("Non-UTA email address: " + email);
-    	}
+	    if (email.endsWith("@uta.edu") || email.endsWith("@mavs.uta.edu")) {
+	        this.name = name;
+	        this.id = id;
+	        this.email = email;
+	        this.account = unlimited ? new Unlimited() : new Alacarte();
+	    } else {
+	        throw new IllegalArgumentException("Non-UTA email address: " + email);
+	    }
 	}
 	
 	public Student (BufferedReader br) throws IOException {

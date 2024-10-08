@@ -1,17 +1,26 @@
 package mdi;
 
 import moes.Moes;
-import customer.Student;
 import product.Media;
+import customer.Account;
+import customer.Alacarte;
+import customer.Unlimited;
+import customer.Student;
 import java.util.Scanner;
+import java.io.*;
 
 
 public class Main {
+	private static final String extension = ".moes";
+	private static final String magicCookie = "MOES FILE";
+	private static final String fileVersion = "1.0";
+	private String filename;
 	private Moes moes;
 	private String output;
 	private Menu menu;
 	private boolean running;
 	private Scanner scanner;
+
 
 	public Main (){
 		this.moes = new Moes();
@@ -19,6 +28,7 @@ public class Main {
 		this.output = " ";
 		this.running = true;
 		scanner = new Scanner(System.in);
+		this.filename = "";
 
 		// Add menu items
         menu.addMenuItem(new MenuItem("Exit\n", () -> endApp()));
@@ -29,6 +39,11 @@ public class Main {
 	    menu.addMenuItem(new MenuItem("Add Media\n", () -> addMedia()));
 	    menu.addMenuItem(new MenuItem("List All Students", () -> listStudents()));
 	    menu.addMenuItem(new MenuItem("Add a Student", () -> addStudent()));
+	    menu.addMenuItem(new MenuItem("New MOES File", () -> newMoes()));
+	    menu.addMenuItem(new MenuItem("Open", () -> open()));
+        menu.addMenuItem(new MenuItem("Save to File", () -> save()));
+        menu.addMenuItem(new MenuItem("Save As New File", () -> saveAs()));
+        
 
 	}
 
@@ -52,6 +67,75 @@ public class Main {
 		running = false;
 		System.out.println("Exiting...");
 	}
+
+	private void newMoes() {
+        this.moes = new Moes();
+        this.filename = "";
+        System.out.println("Started a new MOES session.");
+    }
+
+    private void save() {
+        if (filename.isEmpty()) {
+            System.out.println("No filename specified. Use 'Save As' instead.");
+            return;
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            writer.write(magicCookie);
+            writer.newLine();
+            writer.write(fileVersion);
+            writer.newLine();
+            moes.save(writer);
+            System.out.println("Data saved to " + filename);
+        } catch (IOException e) {
+            System.out.println("Error saving file: " + e.getMessage());
+        }
+    }
+
+    private void saveAs() {
+        System.out.println("Current filename: " + (filename.isEmpty() ? "None" : filename));
+        System.out.print("Enter new filename: ");
+        scanner.nextLine();
+        String newFilename = scanner.nextLine();
+        if (newFilename.isEmpty()) {
+            return;
+        }
+        if (!newFilename.endsWith(extension)) {
+            newFilename += extension;
+        }
+        filename = newFilename;
+        save();
+    }
+
+    private void open() {
+        System.out.println("Current filename: " + (filename.isEmpty() ? "None" : filename));
+        System.out.print("Enter filename to open: ");
+        scanner.nextLine();
+        String newFilename = scanner.nextLine();
+        if (newFilename.isEmpty()) {
+            return;
+        }
+        if (!newFilename.endsWith(extension)) {
+            newFilename += extension;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(newFilename))) {
+            String fileCookie = reader.readLine();
+            if (!magicCookie.equals(fileCookie)) {
+                throw new IOException("Invalid file format.");
+            }
+            String version = reader.readLine();
+            if (!fileVersion.equals(version)) {
+                throw new IOException("Unsupported file version.");
+            }
+            Moes newMoes = new Moes(reader);
+            moes = newMoes;
+            filename = newFilename;
+            System.out.println("File " + filename + " loaded successfully.");
+        } catch (IOException e) {
+            System.out.println("Error opening file: " + e.getMessage());
+        }
+    }
+
 
 	private void addStudent() {
 	scanner.nextLine();
@@ -188,7 +272,3 @@ public class Main {
     	app.mdi();
     }
 }
-
-
-
-
