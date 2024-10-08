@@ -22,32 +22,28 @@ public class Moes {
     for (int i = 0; i < mediaCount; i++) {
         library.add(new Media(br));
     }
-
-    int customerCount = Integer.parseInt(br.readLine());
+	int customerCount = Integer.parseInt(br.readLine());
     for (int i = 0; i < customerCount; i++) {
         String name = br.readLine();
         int id = Integer.parseInt(br.readLine());
         String email = br.readLine();
-        
-        String accountType = br.readLine(); 
+        boolean isUnlimited = Boolean.parseBoolean(br.readLine());
+
         Student student;
-        
-        if (accountType.equals("true")) { 
-            student = new Student(name, id, email, true); 
+        if (isUnlimited) {
+            student = new Student(name, id, email, true);
         } else {
-            student = new Student(name, id, email, false); 
-            int pointsRemaining = Integer.parseInt(br.readLine()); 
+            student = new Student(name, id, email, false);
+            int pointsRemaining = Integer.parseInt(br.readLine());
             ((Alacarte) student.getAccount()).buyPoints(pointsRemaining);
         }
 
-        customers.add(student);
+            customers.add(student);
     }
 }
 
-
-
-	public void save (BufferedWriter bw) throws IOException {
-
+	public void save(BufferedWriter bw) throws IOException {
+       
         bw.write(library.size() + "\n");
         for (Media media : library) {
             media.save(bw);  
@@ -55,7 +51,7 @@ public class Moes {
 
         bw.write(customers.size() + "\n");
         for (Student student : customers) {
-            bw.write(student.toString() + "\n");  
+            student.save(bw);  
             Account account = student.getAccount();
             bw.write((account instanceof Unlimited) + "\n");  
 
@@ -63,7 +59,7 @@ public class Moes {
                 bw.write(((Alacarte) account).getPointsRemaining() + "\n");  
             }
         }
-	}
+    }
 
 	public void addMedia(Media media){
 		library.add(media);

@@ -38,7 +38,7 @@ public class Main {
 	    menu.addMenuItem(new MenuItem("Buy Points", () -> buyPoints()));
 	    menu.addMenuItem(new MenuItem("Add Media\n", () -> addMedia()));
 	    menu.addMenuItem(new MenuItem("List All Students", () -> listStudents()));
-	    menu.addMenuItem(new MenuItem("Add a Student", () -> addStudent()));
+	    menu.addMenuItem(new MenuItem("Add a Student\n", () -> addStudent()));
 	    menu.addMenuItem(new MenuItem("New MOES File", () -> newMoes()));
 	    menu.addMenuItem(new MenuItem("Open", () -> open()));
         menu.addMenuItem(new MenuItem("Save to File", () -> save()));

@@ -23,31 +23,32 @@ public class Student {
 	    }
 	}
 	
-	public Student (BufferedReader br) throws IOException {
-		this.name= br.readLine();
-		this.id = Integer.parseInt(br.readLine());
-		this.email = br.readLine();
+	public Student(BufferedReader br) throws IOException {
+        this.name = br.readLine();
+        this.id = Integer.parseInt(br.readLine());
+        this.email = br.readLine();
 
-		String accountType = br.readLine();
-		if (accountType.equals("alacarte")) {
+        String accountClassName = br.readLine();
+
+        if (accountClassName.equals("customer.Alacarte")) {
             this.account = new Alacarte(br);  
-        } else if (accountType.equals("unlimited")) {
+        } else if (accountClassName.equals("customer.Unlimited")) {
             this.account = new Unlimited(br);  
         } else {
-            throw new IOException("Unknown account type: " + accountType);
+            throw new IOException("Unknown account type: " + accountClassName);
         }
-	}
+    }
 
 	public void save(BufferedWriter bw) throws IOException {
         bw.write(name + "\n"); 
         bw.write(Integer.toString(id) + "\n");  
         bw.write(email + "\n");  
 
-        // Write account type (either "alacarte" or "unlimited")
+        // Write the account class name before calling save
         if (account instanceof Alacarte) {
-            bw.write("alacarte\n");
+            bw.write("customer.Alacarte\n");
         } else if (account instanceof Unlimited) {
-            bw.write("unlimited\n");
+            bw.write("customer.Unlimited\n");
         }
         account.save(bw);  
     }
