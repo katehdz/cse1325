@@ -24,7 +24,6 @@ public class Boggle {
     
     // =========== WRITE AND INVOKE THIS METHOD FOR EACH THREAD ===========
     private static void solveRange(int first, int lastPlusOne, int threadNumber) {
-       log("T" + threadNumber + " R(" + first + "-" + (lastPlusOne) + ")", 1);
 
        for (int i = first; i < lastPlusOne; i++){
             Board board;
@@ -109,6 +108,9 @@ public class Boggle {
                 }else {
                     lastPlusOne = (numberOfBoards / numThreads) * (threadNumber +1);
                 }
+
+                log("T" + threadNumber + " R(" + first + "-" + lastPlusOne + ")", 1);
+
                 final int currentThreadNumber = threadNumber;
                 threads[threadNumber] = new Thread(() -> {
                     solveRange(first, lastPlusOne, currentThreadNumber);
