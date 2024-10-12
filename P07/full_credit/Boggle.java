@@ -24,28 +24,27 @@ public class Boggle {
     
     // =========== WRITE AND INVOKE THIS METHOD FOR EACH THREAD ===========
     private static void solveRange(int first, int lastPlusOne, int threadNumber) {
+       log("T" + threadNumber + " R(" + first + "-" + (lastPlusOne) + ")", 1);
+
        for (int i = first; i < lastPlusOne; i++){
             Board board;
             synchronized (boards){
                 board = boards.get(i);
             }
-            log("Thread " + threadNumber + " is solving board " + i, 1);
-
+            
             Solver solver = new Solver(board, threadNumber, verbosity);
 
             for (String word : words){
                 Solution solution = solver.solve(word);
 
                 if(solution != null){
-                    log("Thread " + threadNumber + " found solution: " + word, 3); 
-
                     synchronized (solutions){
                         solutions.add(solution);
                     } 
                 }
             }
-            log("Thread " + threadNumber + " finished solving board " + i, 2);
        }
+       log("T" + threadNumber + " exits ", 1);
     }
     // =========== END THREAD METHOD ===========
 
@@ -98,13 +97,28 @@ public class Boggle {
             
             // =========== CHANGE THIS BLOCK OF CODE TO ADD THREADING ===========
             // Find words on the Boggle boards, collecting the solutions in a TreeSet
-            int threadNumber = 0; // This will be set to a unique int for each of your threads
-            for(Board board : boards) {
-                Solver solver = new Solver(board, threadNumber, verbosity);
-                for(String word : words) {
-                    Solution solution = solver.solve(word);
-                    if(solution != null) solutions.add(solution);
+
+            Thread[] threads = new Thread[numThreads];
+           
+            for (int threadNumber=0; threadNumber < numThreads; threadNumber++){
+                final int first = (numberOfBoards / numThreads) * threadNumber;
+                final int lastPlusOne;
+
+                if (threadNumber == numThreads -1){
+                    lastPlusOne = numberOfBoards;
+                }else {
+                    lastPlusOne = (numberOfBoards / numThreads) * (threadNumber +1);
                 }
+                final int currentThreadNumber = threadNumber;
+                threads[threadNumber] = new Thread(() -> {
+                    solveRange(first, lastPlusOne, currentThreadNumber);
+                });
+
+                threads[threadNumber].start();
+            }
+
+            for (Thread thread : threads){
+                thread.join();
             }
             // =========== END BLOCK OF CODE TO ADD THREADING ===========
 
