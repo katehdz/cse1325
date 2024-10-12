@@ -12,7 +12,7 @@ NOTE: These are measurements which may vary plus your opinions which may vary a 
 
 QUESTION 1: What Boggle command line arguments ([#boards] and if not default [boardSize])did you use to achieve a 30 to 45 second runtime? Note: We're only interested in the "real" seconds for this question.
 
-I used 85, on average it would give me a result of about 38-41 seconds
+I used 85, on average it would give me a result of about 35-40 seconds
 
 
 
@@ -21,22 +21,197 @@ I used 85, on average it would give me a result of about 38-41 seconds
 
 QUESTION 2: Provide the full output (including the time command) for your program, with 1 to 16 threads. **Ensure that the result is the same for all 16 runs.** With bash, you can run all of these with a single command if you like, replacing "90" with whatever Boggle command line arguments you identified in QUESTION 1: 
 
-for i in {1..16} ; do echo ; echo $i Threads; time java Boggle 90 - $i ; done
+for i in {1..16} ; do echo ; echo $i Threads; time java Boggle 85 - $i ; done
+
+1 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	102%
+user	32.526s
+system	0.277s
+real	32.051s
+
+2 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	202%
+user	36.458s
+system	0.273s
+real	18.131s
+
+3 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	299%
+user	37.316s
+system	0.286s
+real	12.564s
+
+4 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	391%
+user	34.026s
+system	0.252s
+real	8.762s
+
+5 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	500%
+user	34.402s
+system	0.257s
+real	6.928s
+
+6 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	575%
+user	34.847s
+system	0.290s
+real	6.107s
+
+7 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	665%
+user	37.168s
+system	0.327s
+real	5.631s
+
+8 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	585%
+user	38.995s
+system	0.370s
+real	6.718s
+
+9 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	628%
+user	38.490s
+system	0.387s
+real	6.181s
+
+10 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	598%
+user	39.397s
+system	0.384s
+real	6.642s
+
+11 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	536%
+user	39.337s
+system	0.366s
+real	7.406s
+
+12 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	741%
+user	38.542s
+system	0.408s
+real	5.254s
+
+13 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	582%
+user	43.279s
+system	0.436s
+real	7.501s
+
+14 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	741%
+user	42.586s
+system	0.417s
+real	5.799s
+
+15 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	531%
+user	41.787s
+system	0.509s
+real	7.952s
+
+16 Threads
+
+Found 31283 solutions
+Hash is 0x4BA63BE2
+
+================
+CPU	631%
+user	47.420s
+system	0.485s
+real	7.592s
+
 
 
 
 
 QUESTION 3: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?
 
+-Based off my output, adding more threads did speed up the program initially, but eventually when we got to around 8 threads (in my case) it slowed down and sometimes even added time on in the later threads. Causes for the slowdown could be overhead thread management
+
 
 
 QUESTION 4: Does adding more threads increase the "system load", or is it constant regardless of the number of threads?  Why?
 
-Yes, from 0.285 seconds to 1.667 seconds for this data set
-
-
-
-
+-Yes it does increase the system load because we have a higher CPU utilization. I went from 0.252 seconds to .509 seconds.
 
 
 
