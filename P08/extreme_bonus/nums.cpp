@@ -21,10 +21,12 @@ int main (int argc, char* argv[]){
 	}
 	//sort
 	std::sort(words.begin(), words.end());
-
+	
 	//shuffle
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(seed));
+	std::random_device rd;
+	std::default_random_engine rng(rd());
+	std::shuffle(numbers.begin(), numbers.end(), rng);
+
 
 	std::cout <<"Numbers (shuffled):\n";
 	for(const auto& num : numbers){
