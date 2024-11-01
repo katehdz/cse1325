@@ -11,3 +11,15 @@ Clock::Clock(int hours, int minutes, int seconds) : _hours(hours), _minutes(minu
         throw std::out_of_range("Invalid second value: " + std::to_string(seconds));
     }
 }
+
+void Clock::tic() {
+	_seconds++;
+	if (_seconds == 60){
+		_seconds = 0;
+		_minutes++;
+		if (_minutes == 60){
+			_minutes =0;
+			_hours =(_hours + 1) % 24
+		}
+	}
+}
