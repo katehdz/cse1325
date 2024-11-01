@@ -1,4 +1,8 @@
 #include "clock.h"
+#include <iomanip>
+#include <stdexcept>
+#include <iostream>
+#include <string>
 
 Clock::Clock(int hours, int minutes, int seconds) : _hours(hours), _minutes(minutes), _seconds(seconds) {
     if (hours < 0 || hours > 23) {
@@ -19,7 +23,13 @@ void Clock::tic() {
 		_minutes++;
 		if (_minutes == 60){
 			_minutes =0;
-			_hours =(_hours + 1) % 24
+			_hours =(_hours + 1) % 24;
 		}
 	}
+}
+
+void Clock::print() const {
+	std::cout << std::setw(2) << std::setfill('0') << _hours << ":"
+			  << std::setw(2) << std::setfill('0') << _minutes <<":"
+			  << std::setw(2) << std::setfill('0') << _seconds;
 }
