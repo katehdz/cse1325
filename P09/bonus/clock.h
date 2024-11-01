@@ -3,7 +3,7 @@
 #include <iomanip>
 
 class Clock {
-private:
+protected:
     int _hours;
     int _minutes;
     int _seconds;
