@@ -1,4 +1,4 @@
-CXXFLAGS += --std=c++21
+CXXFLAGS += --std=c++20
 main: main.o clock.o timer.o timer_expired.o *.h
 	$(CXX) $(CXXFLAGS) main.o clock.o timer.o timer_expired.o -o timer
 main.o: main.cpp *.h
