@@ -25,7 +25,7 @@ int main() {
 
         Purse account(pounds, shillings, pence);
         vault[account_name] = account;
-        std::cout << "Account " << account_name << " created with " << account << "\n";
+        std::cout << "Account " << account_name << " created with " << account << "\n\n";
     }
 
     std::cout << "\nAccount list\n==========\n";
